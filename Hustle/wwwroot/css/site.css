@@ -6,9 +6,9 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-body {
+/*body {
     background: #fcfcfc;
-}
+}*/
 
 .pacifico {
     font-family: "Pacifico", cursive;
@@ -34,6 +34,7 @@ body {
     background: #ffffff20;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #00000015;
+    z-index: 10;
 }
 
 .hero {
@@ -70,3 +71,199 @@ body {
     .worker:hover {
         box-shadow: 0 0 15px #00000015;
     }
+
+/* How It Works Section Styles */
+/* Horizontal Timeline Styles */
+.hiw-timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 40px 0 20px;
+    margin: 0;
+    gap: 10px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+/* Step Container */
+.hiw-step {
+    flex: 1;
+    min-width: 180px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Left side becomes top for horizontal layout */
+.hiw-step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+    /* Connecting Line between circles */
+    .hiw-step-left::before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: -50%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #E0E0E0 0%, #313131 50%, #E0E0E0 100%);
+        z-index: 0;
+    }
+
+/* First step doesn't need line on left */
+.hiw-step:first-child .hiw-step-left::before {
+    display: none;
+}
+
+/* Step Number Circle */
+.hiw-step-number {
+    width: 50px;
+    height: 50px;
+    background: #313131;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(49, 49, 49, 0.2);
+    margin-bottom: 8px;
+}
+
+    .hiw-step-number:hover {
+        transform: scale(1.15);
+        background: #1a1a1a;
+        box-shadow: 0 6px 20px rgba(49, 49, 49, 0.3);
+    }
+
+/* Hide vertical line (not needed horizontally) */
+.hiw-step-line {
+    display: none;
+}
+
+/* Step Content */
+.hiw-step-content {
+    text-align: center;
+    padding: 0 12px;
+}
+
+.hiw-step-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+    /* Decorative underline under title */
+    .hiw-step-title::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: #313131;
+        border-radius: 2px;
+    }
+
+.hiw-step-description {
+    font-size: 0.9rem;
+    color: #555555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Last step - no extra styling needed */
+.hiw-last-line {
+    display: none;
+}
+
+/* Optional: Add icon before description */
+.hiw-step-description::before {
+    content: '✓ ';
+    color: #313131;
+    font-weight: bold;
+}
+
+/* Mobile Responsive - switches back to vertical */
+@media (max-width: 992px) {
+    .hiw-timeline {
+        flex-direction: column;
+        gap: 30px;
+        overflow-x: visible;
+    }
+
+    .hiw-step {
+        flex-direction: row;
+        text-align: left;
+        min-width: 100%;
+        gap: 20px;
+    }
+
+    .hiw-step-left::before {
+        display: none;
+    }
+
+    .hiw-step-line {
+        display: block;
+        width: 2px;
+        background: #E0E0E0;
+        flex: 1;
+        min-height: 40px;
+        margin-top: 8px;
+    }
+
+    .hiw-step-number {
+        margin-bottom: 0;
+    }
+
+    .hiw-step-content {
+        text-align: left;
+        padding: 0;
+    }
+
+    .hiw-step-title::after {
+        left: 0;
+        transform: none;
+    }
+
+    .hiw-step-description::before {
+        content: '';
+    }
+}
+
+/* For very small screens */
+@media (max-width: 576px) {
+    .hiw-step {
+        gap: 12px;
+    }
+
+    .hiw-step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .hiw-step-title {
+        font-size: 1rem;
+    }
+
+    .hiw-step-description {
+        font-size: 0.85rem;
+    }
+}
