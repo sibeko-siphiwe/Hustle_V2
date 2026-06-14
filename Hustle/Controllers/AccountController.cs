@@ -10,15 +10,15 @@ namespace Hustle.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private const string Role = "Worker";
-        public AccountController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+        private const string WorkerRole = "Worker";
+        private const string EmployerRole = "Employer";
+
+        public AccountController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -31,55 +31,62 @@ namespace Hustle.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                byte[] imageUrl = null;
+                return View(model);
+            }
 
-                if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+            byte[] profileImageBinary = null;
+             
+            if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+            {
+                using (var ms = new MemoryStream())
                 {
-                    using (var ms = new MemoryStream())
-                    {
-                        model.ImageUrl.CopyTo(ms);
-                        imageUrl = ms.ToArray();
-                    }
+                    await model.ImageUrl.CopyToAsync(ms);
+                    profileImageBinary = ms.ToArray();
                 }
+            }
 
-                var user = new ApplicationUser
+            var user = new ApplicationUser
+            {
+                UserName = model.EmailAddress,
+                Email = model.EmailAddress,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                ProfileImage = profileImageBinary,  
+                PhoneNumber = model.PhoneNumber,
+                Location = model.Location,
+                Bio = model.Bio,
+            };
+
+            var createResult = await _userManager.CreateAsync(user, model.Password);
+
+            if (createResult.Succeeded)
+            { 
+                string assignedRole = model.Role ? WorkerRole : EmployerRole;
+
+                var roleResult = await _userManager.AddToRoleAsync(user, assignedRole);
+
+                if (roleResult.Succeeded)
                 {
-                    UserName = model.EmailAddress,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    ProfileImage = imageUrl,
-                    PhoneNumber = model.PhoneNumber,
-                    Location = model.Location,
-                    Bio = model.Bio,
-                    Email = model.EmailAddress,
-                };
-
-                var results = await _userManager.CreateAsync(user, model.Password);
-
-                if (results.Succeeded)
-                {
-                    if (await _roleManager.FindByNameAsync(Role) == null)
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(Role));
-                    }
-
-                    var result = await _userManager.AddToRoleAsync(user, Role);
-
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-
-                        return RedirectToAction("Profile", "Account");
-                    }
-
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Profile", "Account");
                 }
-                foreach (var error in results.Errors)
+                 
+                foreach (var error in roleResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                 
+            }
+            else
+            { 
+                foreach (var error in createResult.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
+
             return View(model);
         }
 
