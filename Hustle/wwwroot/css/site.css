@@ -6,6 +6,10 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /*body {
     background: #fcfcfc;
 }*/
@@ -39,7 +43,7 @@
 
 .hero {
     height: 100vh;
-    background-image: linear-gradient(to top, #000000c2, #00000090, transparent), url('/images/hero.png');
+    background-image: linear-gradient(to top, #000000c2, #00000050, #ffffff90), url('/images/hero.png');
     background-attachment: scroll;
     background-position: center;
     background-size: cover;
@@ -266,4 +270,28 @@
     .hiw-step-description {
         font-size: 0.85rem;
     }
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+    .btn, .nav-link, .worker {
+        cursor: pointer;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        min-height: 48px;
+    }
+}
+
+/* Fix for fixed navigation overlapping content */
+#how-it-works, #find-work, #hire-employees {
+    scroll-margin-top: 80px;
+}
+ 
+
+/* Better focus states for accessibility */
+a:focus, button:focus, input:focus {
+    outline: 2px solid #313131;
+    outline-offset: 2px;
 }
