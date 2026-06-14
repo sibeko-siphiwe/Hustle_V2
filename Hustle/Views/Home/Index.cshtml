@@ -2,7 +2,238 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero d-flex justify-content-center align-items-center">
+    <div class="container text-center">
+        <h2 class="marker display-3">Empowering Local Skills, One Job at a Time</h2>
+        <p class="mb-4 text-light lead">Connect with local professionals for short-term gigs, long-term projects, or even full-time employment</p>
+        <div style="max-width: 500px;" class="mx-auto mb-3">
+            <form asp-action="Search" asp-controller="Jobs" method="get" role="search">
+                <div class="position-relative">
+                    <label for="locationSearch" class="visually-hidden">Search by location</label>
+                    <div class="position-absolute pt-3 ps-3" aria-hidden="true">
+                        <i class="fas fa-search text-muted"></i>
+                    </div>
+                    <input id="locationSearch"
+                           name="location"
+                           class="form-control ps-5 py-3 rounded-pill pe-5 border"
+                           placeholder="Enter your location"
+                           aria-label="Search for jobs by location"
+                           autocomplete="off" />
+                    <div class="position-absolute end-0 top-0 pt-2 pe-2">
+                        <button type="submit" class="btn btn-dark rounded-pill" aria-label="Search jobs">
+                            <span class="d-none d-sm-inline">Search</span>
+                            <i class="fas fa-search d-sm-none" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center text-light">
+            <img src="~/images/verified.png"
+                 alt="Verified worker badge icon"
+                 width="75"
+                 loading="lazy"
+                 decoding="async" />
+            <p class="m-0" aria-live="polite">
+                <strong>1500+</strong> Verified workers around you.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="m-0 marker display-5">Our Values</h2>
+        <p class="m-0 lead text-body-secondary">Our values guide every decision we make.</p>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <div class="border p-4 rounded-3 shadow-sm bg-white">
+                <div class="d-inline-block p-3 bg-light-subtle shadow-sm rounded mb-3">
+                    <i class="ph ph-heart text-dark fs-4"></i>
+                </div>
+                <h5>Community First</h5>
+                <p class="m-0 fw-light text-muted">We believe in the power of local communities. Our platform strengthens township economies.</p>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="border p-4 rounded-3 shadow-sm bg-white">
+                <div class="d-inline-block p-3 bg-light-subtle shadow-sm rounded mb-3">
+                    <i class="ph ph-lightbulb text-dark fs-4"></i>
+                </div>
+                <h5>Skills Over Degrees</h5>
+                <p class="m-0 fw-light text-muted">We value real-world experience over formal education. Your talent speaks for itself.</p>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="border p-4 rounded-3 shadow-sm bg-white">
+                <div class="d-inline-block p-3 bg-light-subtle shadow-sm rounded mb-3">
+                    <i class="ph ph-shield text-dark fs-4"></i>
+                </div>
+                <h5>Trust & Safety</h5>
+                <p class="m-0 fw-light text-muted">Your safety matters. We verify workers through reviews and community feedback to ensure quality service.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="m-0 marker display-5">Popular Services</h2>
+        <p class="m-0 lead text-body-secondary">Find any skill or service you looking for in your kasi with ease.</p>
+    </div>
+    <div class="wrapper gap-4">
+        <div class="service">
+            <div class="service-image overflow-hidden shadow-sm">
+                <img src="~/images/service.png" alt="Service image" class="w-100 h-100 object-fit-cover" />
+            </div>
+            <div class="py-2">
+                <h6>Hairdressing</h6>
+            </div>
+        </div>
+        <div class="service">
+            <div class="service-image overflow-hidden">
+                <img src="~/images/service.png" alt="Service image" class="w-100 h-100 object-fit-cover" />
+            </div>
+        </div>
+        <div class="service">
+            <div class="service-image overflow-hidden">
+                <img src="~/images/service.png" alt="Service image" class="w-100 h-100 object-fit-cover" />
+            </div>
+        </div>
+        <div class="service">
+            <div class="service-image overflow-hidden">
+                <img src="~/images/service.png" alt="Service image" class="w-100 h-100 object-fit-cover" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-5 m-0 bg-body-tertiary">
+    <div class="text-center py-5 my-5">
+        AD SECTION
+    </div>
+</div>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="m-0 marker display-5">Verified Workers</h2>
+        <p class="m-0 lead text-body-secondary">Find any skill or service you looking for in your kasi with ease.</p>
+    </div>
+    <div class="wrapper gap-4">
+        <div class="worker bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-circle border d-inline-block overflow-hidden">
+                    <img src="~/images/avatar.png" alt="Worker Profile Image" height="50" width="50" class="object-fit-cover"/>
+                </div>
+                <div class="text-end">
+                    <span><i class="ph-fill ph-star me-2"></i><strong>4.3</strong></span>
+                    <p class="m-0 fw-medium small">Vrede, Free State</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="fw-lighter m-0">Sibeko Siphiwe</p>
+                <p class="m-0 text-body-tertiary fw-light small">Software Developer</p>
+            </div>
+            <div class="mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter"><i class="ph-thin ph-seal-check me-2"></i>Verified User</p>
+                    </li>
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter text-truncate"><i class="ph-thin ph-lightning me-2"></i>Mobile Applications, Web Application</p> 
+                    </li>
+                </ul>
+            </div>
+            <a class="btn btn-outline-dark btn-sm rounded-3 w-100">View Portfolio</a>
+        </div>
+        <div class="worker bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-circle border d-inline-block overflow-hidden">
+                    <img src="~/images/avatar.png" alt="Worker Profile Image" height="50" width="50" class="object-fit-cover" />
+                </div>
+                <div class="text-end">
+                    <span><i class="ph-fill ph-star me-2"></i><strong>4.3</strong></span>
+                    <p class="m-0 fw-medium small">Vrede, Free State</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="fw-lighter m-0">Sibeko Siphiwe</p>
+                <p class="m-0 text-body-tertiary fw-light small">Software Developer</p>
+            </div>
+            <div class="mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter"><i class="ph-thin ph-seal-check me-2"></i>Verified User</p>
+                    </li>
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter text-truncate"><i class="ph-thin ph-lightning me-2"></i>Mobile Applications, Web Application</p>
+                    </li>
+                </ul>
+            </div>
+            <a class="btn btn-outline-dark btn-sm rounded-3 w-100">View Portfolio</a>
+        </div>
+        <div class="worker bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-circle border d-inline-block overflow-hidden">
+                    <img src="~/images/avatar.png" alt="Worker Profile Image" height="50" width="50" class="object-fit-cover" />
+                </div>
+                <div class="text-end">
+                    <span><i class="ph-fill ph-star me-2"></i><strong>4.3</strong></span>
+                    <p class="m-0 fw-medium small">Vrede, Free State</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="fw-lighter m-0">Sibeko Siphiwe</p>
+                <p class="m-0 text-body-tertiary fw-light small">Software Developer</p>
+            </div>
+            <div class="mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter"><i class="ph-thin ph-seal-check me-2"></i>Verified User</p>
+                    </li>
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter text-truncate"><i class="ph-thin ph-lightning me-2"></i>Mobile Applications, Web Application</p>
+                    </li>
+                </ul>
+            </div>
+            <a class="btn btn-outline-dark btn-sm rounded-3 w-100">View Portfolio</a>
+        </div>
+        <div class="worker bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="rounded-circle border d-inline-block overflow-hidden">
+                    <img src="~/images/avatar.png" alt="Worker Profile Image" height="50" width="50" class="object-fit-cover" />
+                </div>
+                <div class="text-end">
+                    <span><i class="ph-fill ph-star me-2"></i><strong>4.3</strong></span>
+                    <p class="m-0 fw-medium small">Vrede, Free State</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="fw-lighter m-0">Sibeko Siphiwe</p>
+                <p class="m-0 text-body-tertiary fw-light small">Software Developer</p>
+            </div>
+            <div class="mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter"><i class="ph-thin ph-seal-check me-2"></i>Verified User</p>
+                    </li>
+                    <li class="nav-item">
+                        <p class="m-0 fw-lighter text-truncate"><i class="ph-thin ph-lightning me-2"></i>Mobile Applications, Web Application</p>
+                    </li>
+                </ul>
+            </div>
+            <a class="btn btn-outline-dark btn-sm rounded-3 w-100">View Portfolio</a>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+    <div class="text-center mb-5">
+        <h2 class="m-0 marker display-5">How this works</h2>
+        <p class="m-0 lead text-body-secondary">Find any skill or service you looking for in your kasi with ease.</p>
+    </div>
+</div>
+<div class="container py-5 text-center">
+    <h1 class="display-1 fw-medium">Join us & Express<br/><i>Your Skills</i></h1>
+    <p class="lead mb-3 mx-5 text-muted">Join our platform and offer your skills or find skills you might need near you, faster and safely with verified users</p>
+    <div class="d-flex justify-content-center gap-2">
+        <a class="btn btn-dark btn-lg rounded-pill px-5">Get Started</a>
+        <a class="btn btn-outline-dark btn-lg rounded-pill px-3">Explore Hustlers</a>
+    </div>
 </div>

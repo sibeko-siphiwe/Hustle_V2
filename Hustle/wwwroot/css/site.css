@@ -1,8 +1,13 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: .2s all ease-in-out;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background: #fcfcfc;
 }
 
 .pacifico {
@@ -11,15 +16,57 @@
     font-style: normal;
 }
 
+.marker {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 .navigation{
     position: fixed;
     left: 0;
     right: 0;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
 }
 
 .navigation.scrolled {
     background: #ffffff20;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid #00000015;
 }
+
+.hero {
+    height: 100vh;
+    background-image: linear-gradient(to top, #000000c2, #00000090, transparent), url('/images/hero.png');
+    background-attachment: scroll;
+    background-position: center;
+    background-size: cover;
+}
+
+.hero h2{
+    color: white; 
+    text-shadow: 0 0 10px black;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+}
+
+.service-image{
+    height: 300px;
+    border-radius: 20px;
+    border: 2px solid #00000005;
+}
+
+.worker{
+    border: 1px solid #00000010; 
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px #00000005;
+}
+
+    .worker:hover {
+        box-shadow: 0 0 15px #00000015;
+    }
