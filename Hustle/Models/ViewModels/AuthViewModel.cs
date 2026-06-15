@@ -71,7 +71,8 @@ namespace Hustle.Models.ViewModels
         [DisplayName("Username")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DisplayName("Remember Me?")]

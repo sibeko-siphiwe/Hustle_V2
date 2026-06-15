@@ -1,0 +1,29 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login to your account";
+} 
+
+<div class="container py-4">
+    <form asp-action="Login" method="post" class="pt-5 mx-auto" style="max-width: 600px;">
+        <div class="text-center mt-5 mb-5">
+            <h2 class="display-5 m-0 marker">Welcome Back</h2>
+            <p class="m-0 lead text-muted">Verified workers. Real reviews. Safe hiring. Register today.</p>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="ReturnUrl" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control" placeholder="Enter your email address">
+        </div>
+        <div class="mb-2">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" placeholder="Enter your password">
+        </div>
+        <div class="form-check form-switch mb-2">
+            <input asp-for="RememberMe" class="form-check-input" />
+            <label asp-for="RememberMe"></label>
+        </div>
+        <button type="submit" class="btn btn-dark w-100 mb-2">Login</button>
+        <p class="text-center mb-5">Don't have an account? <a asp-action="Register" asp-controller="Account">Register</a></p>
+    </form>
+</div>

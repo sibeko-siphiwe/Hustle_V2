@@ -36,6 +36,12 @@ namespace Hustle.Controllers
                 return View(model);
             }
 
+            if (await _userManager.FindByNameAsync(model.EmailAddress) != null)
+            {
+                ModelState.AddModelError("", "User with this email already exist. Please login");
+                return View(model);
+            }
+
             byte[] profileImageBinary = null;
              
             if (model.ImageUrl != null && model.ImageUrl.Length > 0)
@@ -90,10 +96,54 @@ namespace Hustle.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Login(string returnUrl)
+        {
+            return View(new LoginViewModel
+            {
+                ReturnUrl = returnUrl
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(model.UserName);
+
+                if (user != null)
+                {
+                    var results = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+
+                    if (results.Succeeded)
+                    {
+                        if(model.ReturnUrl != null)
+                        {
+                            return RedirectToAction(model.ReturnUrl);
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                }
+                ModelState.AddModelError("", "Invalid username or password.");
+
+            }
+            return View(model);
+        }
+
         [Authorize]
         public IActionResult Profile()
         {
             return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

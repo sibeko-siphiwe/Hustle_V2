@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hustle.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260614152022_Initial")]
+    [Migration("20260614153928_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
